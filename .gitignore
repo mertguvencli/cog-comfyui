@@ -16,3 +16,6 @@ manifest.txt
 updated_weights.json
 downloaded_user_models/
 .cog
+
+venv
+.venv

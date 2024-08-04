@@ -1,0 +1,233 @@
+{
+    "62": {
+      "inputs": {
+        "seed": 677229287898570,
+        "steps": 8,
+        "cfg": 2,
+        "sampler_name": "dpmpp_sde",
+        "scheduler": "karras",
+        "denoise": 1,
+        "model": [
+          "63",
+          0
+        ],
+        "positive": [
+          "64",
+          0
+        ],
+        "negative": [
+          "65",
+          0
+        ],
+        "latent_image": [
+          "114",
+          0
+        ]
+      },
+      "class_type": "KSampler",
+      "_meta": {
+        "title": "KSampler"
+      }
+    },
+    "63": {
+      "inputs": {
+        "ckpt_name": "dreamshaperXL_lightningDPMSDE.safetensors"
+      },
+      "class_type": "CheckpointLoaderSimple",
+      "_meta": {
+        "title": "Load Checkpoint"
+      }
+    },
+    "64": {
+      "inputs": {
+        "text": "A portrait of a distinguished young man in a Victorian-era suit, featuring a black double-breasted jacket with brass buttons, a white dress shirt with a high collar, and a bow tie. The suit is complemented by a detailed waistcoat with intricate chain accessories. The man has curly brown hair, a well-groomed beard, and a serious expression. The background is dimly lit, adding to the classic and sophisticated atmosphere.",
+        "clip": [
+          "63",
+          1
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Prompt)"
+      }
+    },
+    "65": {
+      "inputs": {
+        "text": "blur, low resolution, poorly dressed, modern clothing, casual attire, messy hair, unkempt appearance, overly bright lighting, colorful background, outdoor setting, digital artifacts, smiling, informal pose, bad anatomy",
+        "clip": [
+          "63",
+          1
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Prompt)"
+      }
+    },
+    "67": {
+      "inputs": {
+        "samples": [
+          "62",
+          0
+        ],
+        "vae": [
+          "63",
+          2
+        ]
+      },
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE Decode"
+      }
+    },
+    "71": {
+      "inputs": {
+        "image": "input.jpeg",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "84": {
+      "inputs": {
+        "guide_size": 512,
+        "guide_size_for": true,
+        "max_size": 1024,
+        "seed": 961211583604663,
+        "steps": 20,
+        "cfg": 8,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 0.5,
+        "feather": 5,
+        "noise_mask": true,
+        "force_inpaint": true,
+        "bbox_threshold": 0.5,
+        "bbox_dilation": 10,
+        "bbox_crop_factor": 3,
+        "sam_detection_hint": "center-1",
+        "sam_dilation": 0,
+        "sam_threshold": 0.93,
+        "sam_bbox_expansion": 0,
+        "sam_mask_hint_threshold": 0.7,
+        "sam_mask_hint_use_negative": "False",
+        "drop_size": 10,
+        "wildcard": "",
+        "cycle": 1,
+        "inpaint_model": false,
+        "noise_mask_feather": 20,
+        "image": [
+          "67",
+          0
+        ],
+        "model": [
+          "63",
+          0
+        ],
+        "clip": [
+          "63",
+          1
+        ],
+        "vae": [
+          "63",
+          2
+        ],
+        "positive": [
+          "65",
+          0
+        ],
+        "negative": [
+          "65",
+          0
+        ],
+        "bbox_detector": [
+          "86",
+          0
+        ],
+        "sam_model_opt": [
+          "87",
+          0
+        ],
+        "segm_detector_opt": [
+          "86",
+          1
+        ]
+      },
+      "class_type": "FaceDetailer",
+      "_meta": {
+        "title": "FaceDetailer"
+      }
+    },
+    "86": {
+      "inputs": {
+        "model_name": "bbox/face_yolov8m.pt"
+      },
+      "class_type": "UltralyticsDetectorProvider",
+      "_meta": {
+        "title": "UltralyticsDetectorProvider"
+      }
+    },
+    "87": {
+      "inputs": {
+        "model_name": "sam_vit_b_01ec64.pth",
+        "device_mode": "AUTO"
+      },
+      "class_type": "SAMLoader",
+      "_meta": {
+        "title": "SAMLoader (Impact)"
+      }
+    },
+    "88": {
+      "inputs": {
+        "enabled": true,
+        "swap_model": "inswapper_128.onnx",
+        "facedetection": "retinaface_resnet50",
+        "face_restore_model": "codeformer.pth",
+        "face_restore_visibility": 1,
+        "codeformer_weight": 0.5,
+        "detect_gender_input": "no",
+        "detect_gender_source": "no",
+        "input_faces_index": "0",
+        "source_faces_index": "0",
+        "console_log_level": 1,
+        "input_image": [
+          "84",
+          0
+        ],
+        "source_image": [
+          "71",
+          0
+        ]
+      },
+      "class_type": "ReActorFaceSwap",
+      "_meta": {
+        "title": "ReActor 🌌 Fast Face Swap"
+      }
+    },
+    "114": {
+      "inputs": {
+        "width": 432,
+        "height": 768,
+        "batch_size": 6
+      },
+      "class_type": "EmptyLatentImage",
+      "_meta": {
+        "title": "Empty Latent Image"
+      }
+    },
+    "148": {
+      "inputs": {
+        "filename_prefix": "ComfyUI",
+        "images": [
+          "88",
+          0
+        ]
+      },
+      "class_type": "SaveImage",
+      "_meta": {
+        "title": "Save Image"
+      }
+    }
+  }
